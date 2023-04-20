@@ -1,0 +1,11 @@
+<h2>Mon Profil</h2>
+
+<div>
+  <p>articles sauvegarder</p>
+
+
+  <?php foreach ($articles as $article) : ?>
+        <h3><?= $article['title'] ?></h3>
+        <time><?= $article['image'] ?></time>
+    <?php endforeach; ?>
+</div>

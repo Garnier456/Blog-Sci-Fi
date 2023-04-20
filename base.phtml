@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Sci-Fi</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1>Titre</h1>
+        </div>
+
+        <nav>
+            <div>
+                <a href="index.php">Accueil</a>
+                <a href="">Film</a>
+                <a href="">Série</a>
+                <a href="">Livre</a>
+                <a href="">Comics</a>
+                <a href="">Jeux Vidéo</a>
+                <a href="">Sci-Facts</a>
+                <a href="">A propos</a>
+            </div>
+
+            <div>
+                <?php if (!isConnected()): ?>
+                    <a href="login.php">Connexion</a>
+                    <a href="signup.php">S'inscrire</a>
+                <?php else: ?>
+                    <?php if (isAdmin()): ?>
+                        <a href="admin.php">Dashboard</a>
+                    <?php else: ?>
+                        <a href="profile.php">Mon profil</a>
+                    <?php endif; ?>
+                    <a href="logout.php">Déconnexion</a>
+                <?php endif; ?>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- inclusion du fichier de template -->
+        <?php include $template . '.phtml'; ?>
+    </main>
+</body>
+</html>

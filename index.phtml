@@ -1,0 +1,46 @@
+<!-- Message flash le cas échéant -->
+<?php if ($flashMessage != null) : ?>
+  <p><?=$flashMessage;?></p>
+<?php endif; ?>
+
+<section>
+    <div id="left-side">
+        <h1>Articles : </h1>
+
+        <?php foreach($articles as $article): ?>
+            <article class="standard-article">
+                <div class="img-article">
+                    <img src="<?= $article['image'] ?>" alt="">
+                </div>
+
+                <div>
+                    <h2><?= $article['title'] ?></h2>
+                    <time><?= $article['created_at'] ?></time>
+                    <p><?= $article['content'] ?></p>
+                    <a href="article.php?id=<?= $article['id'] ?>">Lire la suite</a>
+                </div>
+            </article>
+        <?php endforeach; ?>
+    </div>
+
+    <div id="right-side">
+        <div class="citation">
+            <div>
+                <h2>Citation du jour</h2>
+            </div>
+
+            <div>
+                <p>On peut définir la Science-Fiction comme la branche de la littérature qui se soucie des réponses de l'être humain aux progrès de la science et de la technologie.
+                Isaac Asimov</p>
+            </div>
+        </div>
+
+        <article>
+            <h2>Article Populaire</h2>
+            <img src="" alt="">
+            <p>date</p>
+        </article>
+    </div>
+</section>
+
+

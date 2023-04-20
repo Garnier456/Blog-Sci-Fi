@@ -1,0 +1,21 @@
+<h1><?= $article['title'] ?></h1>
+    <time> <?= $article['created_at'] ?></time>
+
+    <input type="button" id="button" value="Ajouter" onclick="action()">
+
+    <form action="article.php?id=<?= $article['id'] ?>" method="POST">
+    <label for="author">Pseudo :</label>
+    <input type="text" name="author" id="author" value= "<?php if(isset($author)) echo $author ?>">
+
+    <label for="comment">Commentaire :</label>
+    <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+    <button type="submit">Envoyer</button>
+    </form>
+
+    <h2>Commentaires :</h2>
+
+    <?php foreach ($comments as $com) : ?>
+        <h3><?= $com['author'] ?></h3>
+        <time><?= $com['created_at'] ?></time>
+        <p><?= $com['content'] ?></p>
+    <?php endforeach; ?>

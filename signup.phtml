@@ -1,0 +1,38 @@
+<h1>Création de compte client</h1>
+
+<form action="signup.php" method="POST">
+  <div>
+    <label for="pseudo">Pseudo :</label>
+    <input type="text" id="pseudo" name="pseudo">
+    <?php if(isset($errors['pseudo'])):?>
+      <p><?=$errors['pseudo'];?></p>
+    <?php endif; ?>
+  </div>
+
+  <div>
+    <label for="email">Email :</label>
+    <input type="text" id="email" name="email">
+    <?php if(isset($errors['email'])):?>
+      <p><?=$errors['email'];?></p>
+    <?php endif; ?>
+  </div>
+
+  <div>
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password">
+    <?php if(isset($errors['password'])):?>
+      <p><?=$errors['password'];?></p>
+    <?php endif; ?>
+  </div>
+
+  <div>
+    <label for="password-confirm">Confirmation :</label>
+    <input type="password" id="password-confirm" name="password-confirm">
+    <?php if(isset($errors['password-confirm'])):?>
+      <p><?=$errors['password-confirm'];?></p>
+    <?php endif; ?>
+  </div>
+
+  <input type="submit" value="Créer compte">
+</form>
+
