@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Titillium+Web&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    font-family: 'Titillium Web', sans-serif;
+    margin: 0 100px;
+}
+
 header > div {
     display: flex;
     justify-content: center;
@@ -10,23 +23,27 @@ header > div {
     color: white;
 }
 
+
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height: 50px;
     background-color: #344C65;
+    font-family: 'Orbitron', sans-serif;
 }
 
+
 nav a {
+    margin: 0 5px;
     color: white;
     text-decoration: none;
 }
 
 section {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 20px;
+    grid-template-columns: 3.2fr 1fr;
+    grid-gap: 60px;
 }
 
 #left-side {
@@ -40,32 +57,62 @@ section {
 .standard-article {
     display: flex;
     gap: 30px;
+    padding: 10px;
+    margin-bottom: 30px;
+    background-color: #67A3AC;
+    color: white;
+    border-radius: 10px;
 }
 
-.standard-article img {
-    width: 200px;
+.standard-article h2, p {
+    margin: 0;
+  }
+
+.standard-article span {
+    width: 100px;
+    border: 2px solid black;
+    text-align: center;
+  }
+
+.img-article {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.img-article img {
+    width: 400px;
     height: 270px;
+    border-radius: 10px;
 }
 
-.citation {
+
+.standard-article div:nth-of-type(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#citation {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-top: 36px;
     border: 2px solid #3D3F69;
     border-left: 10px solid #3D3F69;
 }
 
-.citation > div:first-child {
-    background-color: #54578F;
+#citation > div:first-child {
+    background-color: #344C65;
     color: white;
     padding-left: 10px;
 }
 
-.citation > div:first-child h2 {
+#citation > div:first-child h2 {
     margin: 5px;
 }
 
-.citation p {
+#citation p {
    margin: auto;
    padding: 5px;
 }

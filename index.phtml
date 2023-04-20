@@ -15,18 +15,20 @@
 
                 <div>
                     <h2><?= $article['title'] ?></h2>
-                    <time><?= $article['created_at'] ?></time>
-                    <p><?= $article['content'] ?></p>
-                    <a href="article.php?id=<?= $article['id'] ?>">Lire la suite</a>
+                    <p>by <?= getUserName($article['id']) ?></p>
+                    <p><?= $article['intro'] ?> <a href="article.php?id=<?= $article['id'] ?>">Lire la suite</a></p>
+                    
+                    <span><?= getCategoryName($article['id']) ?></span>
+                    
                 </div>
             </article>
         <?php endforeach; ?>
     </div>
 
     <div id="right-side">
-        <div class="citation">
+        <div id="citation">
             <div>
-                <h2>Citation du jour</h2>
+                <h2>Sci-Fi Facts du Jour</h2>
             </div>
 
             <div>
@@ -38,7 +40,6 @@
         <article>
             <h2>Article Populaire</h2>
             <img src="" alt="">
-            <p>date</p>
         </article>
     </div>
 </section>

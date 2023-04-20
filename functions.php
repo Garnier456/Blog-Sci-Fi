@@ -141,11 +141,10 @@ function getArticle($id) {
 
     $sql = "SELECT *
             FROM articles
-            WHERE id = :id";
+            WHERE id = ?";
 
     $data = $pdo->prepare($sql);
-    $data->bindParam(':id', $id, PDO::PARAM_INT);
-    $data->execute();
+    $data->execute([$id]);
 
     return $data->fetch();
 }
@@ -202,6 +201,47 @@ function getUsers() {
 
     return $data->fetchAll();
 }
+
+function getUserName($article_id) {
+    global $pdo;
+
+    $sql = "SELECT users.username
+            FROM articles
+            INNER JOIN users ON articles.user_id = users.id
+            WHERE articles.id = ?";
+
+    $data = $pdo->prepare($sql);
+    $data->execute([$article_id]);
+
+    $result = $data->fetch();
+
+    if ($result) {
+        return $result['username'];
+    } else {
+        return false;
+    }
+}
+
+function getCategoryName($article_id) {
+    global $pdo;
+
+    $sql = "SELECT categories.name
+            FROM articles
+            INNER JOIN categories ON articles.category_id = categories.id
+            WHERE articles.id = ?";
+
+    $data = $pdo->prepare($sql);
+    $data->execute([$article_id]);
+
+    $result = $data->fetch();
+
+    if ($result) {
+        return $result['name'];
+    } else {
+        return false;
+    }
+}
+
 
 function banned($id) {
     global $pdo;
