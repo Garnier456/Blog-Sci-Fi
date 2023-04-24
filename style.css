@@ -122,8 +122,51 @@ section {
    justify-content: space-evenly;
 }
 
-#login-page {
-    
+#menu-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    cursor: pointer;
 }
+
+#admin-create form {
+    display: flex;
+    justify-content: space-between;
+}
+
+#admin-create form div {
+    width: 100%;
+}
+
+#content-article {
+    display: flex;
+    justify-content: space-between;
+}
+
+#content-article span {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#admin-create form div:last-child {
+    text-align: center;
+}
+
+#dropzone {
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 80%;
+    height: 200px;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+  }
+
+.hover {
+    border: 2px solid blueviolet;
+}
+
 
 

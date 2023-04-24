@@ -291,15 +291,12 @@ function suppArticle($id) {
     }
 }
 
-function insertArticle($title, $content, $image, $category) {
+function insertArticle($title, $content, $intro, $image, $category, $user_id) {
     global $pdo;
 
-    // Récupérer l'id de l'utilisateur
-    $user_id = $_SESSION['user_id'];
-
     $sql = "INSERT INTO articles
-            (title, content, image, category_id, user_id, created_at)
-            VALUES (?, ?, ?, ?, ?, NOW())";
+            (title, content, intro, image, category_id, user_id, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
     // Récupérer l'id de la catégorie
     $query = $pdo->prepare("SELECT id FROM categories WHERE name = ?");
@@ -308,7 +305,7 @@ function insertArticle($title, $content, $image, $category) {
 
     // Insérer le nouvel article en utilisant l'id de la catégorie et de l'utilisateur
     $data = $pdo->prepare($sql);
-    $data->execute([$title, $content, $image, $category_id, $user_id]);
+    $data->execute([$title, $content, $intro, $image, $category_id, $user_id]);
 
     return $data;
 }

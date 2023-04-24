@@ -3,19 +3,17 @@
     <p>Articles</p>
     <p>Utilisateurs</p>
     <p>Commentaires</p>
+    <button>Créer Article</button>
 </div>
 
 <section id="dashboard">
-
-    <button></button>
-
     <div>
-    <?php foreach($articles as $article): ?>
-        <h2><?= $article['title'] ?></h2>
-        <time> <?= $article['created_at'] ?></time>
-        <br>
-        <a href="delete.php?id=<?= $article['id']; ?>">Supprimer</a>
-        <a href="update.php?id=<?= $article['id']; ?>">Modifier</a>
+        <?php foreach($articles as $article): ?>
+            <h2><?= $article['title'] ?></h2>
+            <time> <?= $article['created_at'] ?></time>
+            <br>
+            <a href="delete.php?id=<?= $article['id']; ?>">Supprimer</a>
+            <a href="update.php?id=<?= $article['id']; ?>">Modifier</a>
     <?php endforeach; ?>
     </div>
 
@@ -49,6 +47,45 @@
         <time><?= $com['created_at'] ?></time>
         <p><?= $com['content'] ?></p>
     <?php endforeach; ?>
+</section>
+
+<section id ="admin-create">
+    <h3>Créer Article</h3>
+
+    <form action="addArticle.php" method="POST" enctype="multipart/form-data">
+        <div id="content-article">
+            <span>
+                <label for="title">titre</label>
+                <input type="text" name="title" id="title">
+                
+                <label for="intro">intro</label>
+                <input type="text" name="intro" id="intro">
+                
+                <label for="category">Catégorie</label>
+                <select name="category" id="category">
+                    <?php
+                        $getCategory = $pdo->query("SELECT * FROM categories");
+                        while ($category = $getCategory->fetch()) {
+                            echo '<option>' . $category['name'] . '</option>';
+                        }
+                        ?>
+                </select>
+
+                <input type="submit" name="envoi">
+            </span>
+            
+            <span>
+                <label for="content">description</label>
+                <textarea name="content" id="content" cols="30" rows="10"></textarea>
+            </span>
+        </div>
+        
+        
+        <div id="dropzone">
+            <p>Faites glisser et déposez votre fichier ici</p>
+            <img id="preview" src="" alt="Image preview">
+        </div>
+    </form>
 </section>
 
 
