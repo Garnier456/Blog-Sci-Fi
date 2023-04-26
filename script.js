@@ -65,30 +65,39 @@ create.addEventListener("click", () => {
 
 
 
-const dropzone = document.querySelector('#dropzone');
+const wrapper = document.querySelector('.wrapper');
+let isDown = false;
+let startX, startY;
+let scrollLeft, scrollTop;
 
-dropzone.addEventListener('dragover', (e) => {
+wrapper.addEventListener('mousedown', (e) => {
+  isDown = true;
+  startX = e.pageX - wrapper.offsetLeft;
+  startY = e.pageY - wrapper.offsetTop;
+  scrollLeft = wrapper.scrollLeft;
+  scrollTop = wrapper.scrollTop;
+});
+
+wrapper.addEventListener('mouseleave', () => {
+  isDown = false;
+});
+
+wrapper.addEventListener('mouseup', () => {
+  isDown = false;
+});
+
+wrapper.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
   e.preventDefault();
-  dropzone.classList.add('.hover');
+  const x = e.pageX - wrapper.offsetLeft;
+  const y = e.pageY - wrapper.offsetTop;
+  const walkX = (x - startX) * 3; // La sensibilité de la souris sur l'axe X
+  const walkY = (y - startY) * 3; // La sensibilité de la souris sur l'axe Y
+  wrapper.scrollLeft = scrollLeft - walkX;
+  wrapper.scrollTop = scrollTop - walkY;
 });
 
-dropzone.addEventListener('dragleave', () => {
-  dropzone.classList.remove('.hover');
-});
 
-dropzone.addEventListener('drop', (e) => {
-  e.preventDefault();
-  dropzone.classList.remove('.hover');
-
-  const file = e.dataTransfer.files[0];
-  console.log(file); // log des fichiers pour vérification
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    dropzone.style.backgroundImage = `url('${reader.result}')`;
-  };
-  reader.readAsDataURL(file);
-});
 
   
   

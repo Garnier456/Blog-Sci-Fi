@@ -16,18 +16,22 @@ if (isset($_POST['envoi'])) {
         $user_id = $_SESSION['user_id'];
 
         // Récupérer le nom du fichier uploadé et le déplacer vers le dossier d'upload
-        if (!empty($_FILES['image']['name'])) {
-            $imageName = $_FILES['image']['name'];
-            $imageTemp = $_FILES['image']['tmp_name'];
-            $imagePath = 'images/' . $imageName;
-            move_uploaded_file($imageTemp, $imagePath);
-        } else {
-            $imageName = '';
-            echo 'Une erreur est survenue lors du téléchargement du fichier';
+        if(isset($_FILES['inputImage']))
+{ 
+        $folder = 'images/';
+        $file = $_FILES['inputImage']['name'];
+        $imagePath =  $folder . $file;
+        
+        if(move_uploaded_file($_FILES['inputImage']['tmp_name'], $imagesFile . $file)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+        {
+          echo 'Upload effectué avec succès !';
+          $addArticle = insertArticle($title, $content, $intro, $imagePath, $category, $user_id);
         }
-
-        $addArticle = insertArticle($title, $content, $intro, $imagePath, $category, $user_id);
-
+        else //Sinon (la fonction renvoie FALSE).
+        {
+          echo 'Echec de l\'upload !';
+        }
+}
         // Rediriger vers la page d'administration
         header("Location: admin.php");
         exit();

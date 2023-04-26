@@ -127,8 +127,8 @@ function getLastArticles() {
 
     $sql = "SELECT *
             FROM articles
-            ORDER BY created_at DESC
-            LIMIT 3";
+            ORDER BY id DESC
+            LIMIT 10";
 
     $data = $pdo->prepare($sql);
     $data->execute();
@@ -148,6 +148,7 @@ function getArticle($id) {
 
     return $data->fetch();
 }
+
 
 function addComment($author, $comment, $article_id) {
     global $pdo;
@@ -237,6 +238,26 @@ function getCategoryName($article_id) {
 
     if ($result) {
         return $result['name'];
+    } else {
+        return false;
+    }
+}
+
+function getCategoryIcon($article_id) {
+    global $pdo;
+
+    $sql = "SELECT categories.icons
+            FROM articles
+            INNER JOIN categories ON articles.category_id = categories.id
+            WHERE articles.id = ?";
+
+    $data = $pdo->prepare($sql);
+    $data->execute([$article_id]);
+
+    $result = $data->fetch();
+
+    if ($result) {
+        return $result['icons'];
     } else {
         return false;
     }

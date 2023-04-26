@@ -1,47 +1,66 @@
 <!-- Message flash le cas échéant -->
 <?php if ($flashMessage != null) : ?>
-  <p><?=$flashMessage;?></p>
+    <p><?= $flashMessage; ?></p>
 <?php endif; ?>
 
-<section>
-    <div id="left-side">
-        <h1>Articles : </h1>
+<section class="columns-container">
+    <div class="wrapper">
+        <div class="col-1">
+            <div class="content-column">
+                <?php foreach ($articles as $article) : ?>
+                    <article class="standard-article">
+                        <div class="img-article" style="background-image: url('<?= $article['image'] ?>')">
+                            <div class="category-article">
+                                <div>
+                                    <img src=" <?= getCategoryIcon($article['id']) ?>" alt="">
+                                    <a><?= getCategoryName($article['id']) ?></a>
+                                </div>
+                                <time><?= $article['created_at'] ?></time>
+                            </div>
+                        </div>
 
-        <?php foreach($articles as $article): ?>
-            <article class="standard-article">
-                <div class="img-article">
-                    <img src="<?= $article['image'] ?>" alt="">
-                </div>
-
-                <div>
-                    <h2><?= $article['title'] ?></h2>
-                    <p>by <?= getUserName($article['id']) ?></p>
-                    <p><?= $article['intro'] ?> <a href="article.php?id=<?= $article['id'] ?>">Lire la suite</a></p>
-                    
-                    <span><?= getCategoryName($article['id']) ?></span>
-                    
-                </div>
-            </article>
-        <?php endforeach; ?>
-    </div>
-
-    <div id="right-side">
-        <div id="citation">
-            <div>
-                <h2>Sci-Fi Facts du Jour</h2>
-            </div>
-
-            <div>
-                <p>On peut définir la Science-Fiction comme la branche de la littérature qui se soucie des réponses de l'être humain aux progrès de la science et de la technologie.
-                Isaac Asimov</p>
+                        <div class="content-article">
+                            <h2><?= $article['title'] ?></h2>
+                            <p><?= $article['intro'] ?></p>
+                            <span>
+                                <p>by <?= getUserName($article['id']) ?></p>
+                                <a href="article.php?id=<?= $article['id'] ?>">Lire la suite</a>
+                            </span>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
             </div>
         </div>
 
-        <article>
-            <h2>Article Populaire</h2>
-            <img src="" alt="">
-        </article>
+        <div class="col-2">
+            <div class="content-column">
+                <?php foreach ($articles as $article) : ?>
+                    <article class="standard-article">
+                        <div class="img-article" style="background-image: url('<?= $article['image'] ?>')">
+                            <div class="category-article">
+                                <div>
+                                    <img src=" <?= getCategoryIcon($article['id']) ?>" alt="">
+                                    <a><?= getCategoryName($article['id']) ?></a>
+                                </div>
+                                <time><?= $article['created_at'] ?></time>
+                            </div>
+                        </div>
+
+                        <div class="content-article">
+                            <h2><?= $article['title'] ?></h2>
+                            <p><?= $article['intro'] ?></p>
+                            <span>
+                                <p>by <?= getUserName($article['id']) ?></p>
+                                <a href="article.php?id=<?= $article['id'] ?>">Lire la suite</a>
+                            </span>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        
     </div>
 </section>
-
-
