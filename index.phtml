@@ -60,7 +60,25 @@
         </div>
     </div>
 
-    <div>
-        
+    <div id="right-block">
+        <div id="quotes">
+            <span>
+                <h2>Sci-Fact du Jour</h2>
+            </span>
+            <p><?= getDayFact() ?></p>
+        </div>
+
+        <div id="top-article-box">
+            <?php foreach ($topArticles as $topArticle) : ?>
+                <article>
+                    <div id="img-top" style="background-image: url('<?= $topArticle['image'] ?>')">
+                    </div>
+
+                    <h2><?= $topArticle['title'] ?></h2>
+                    <p><?= $topArticle['intro'] ?></p>
+                </article>
+            <?php endforeach; ?>
+        </div>
     </div>
+
 </section>

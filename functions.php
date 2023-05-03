@@ -1,8 +1,4 @@
 <?php
-// if (session_status() == PHP_SESSION_NONE) {
-//     session_start();
-// }
-
                     /***************
                     SIGNUP FUNCTIONS
                     ****************/
@@ -136,6 +132,20 @@ function getLastArticles() {
     return $data->fetchAll();
 }
 
+function getLast3Articles()  {
+    global $pdo;
+
+    $sql = "SELECT *
+            FROM articles
+            ORDER BY id DESC
+            LIMIT 3";
+
+    $data = $pdo->prepare($sql);
+    $data->execute();
+
+    return $data->fetchAll();
+}
+
 function getArticle($id) {
     global $pdo;
 
@@ -262,6 +272,20 @@ function getCategoryIcon($article_id) {
         return false;
     }
 }
+ 
+function getDayFact() {
+    global $pdo;
+
+    $sql = "SELECT content 
+            FROM facts 
+            ORDER BY RAND() 
+            LIMIT 1";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchColumn();
+}
 
 
 function banned($id) {
@@ -356,4 +380,32 @@ function updateArticle($titre, $contenu, $id) {
     $data->execute([$titre, $contenu, $id]);
 
     return $data->fetch();
+}
+
+function insertSaveArticle($userId, $articleId) {
+    global $pdo;
+
+    $sql = "INSERT INTO articles_saves 
+            (id_user, id_article) 
+            VALUES (?, ?)";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$userId, $articleId]);
+}
+
+function checkSaveArticle($userId, $articleId) {
+    global $pdo;
+
+    $sql = "SELECT *
+            FROM articles_saves 
+            WHERE id_article = ? AND id_user = ?";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$userId, $articleId]);
+
+    if($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
 }

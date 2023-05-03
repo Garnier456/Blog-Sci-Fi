@@ -19,6 +19,7 @@ if (array_key_exists('flash', $_SESSION) && $_SESSION['flash']) {
 }
 
 $articles = getLastArticles();
+$topArticles = getLast3Articles();
 
 // Inclusion du template
 $template = 'index';
