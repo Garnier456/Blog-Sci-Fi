@@ -1,9 +1,13 @@
 <?php
-// Démarrage de la session
+
 session_start();
 
-// Inclusion des dépendances
-require 'config.php';
+require '../vendor/autoload.php';
+
+use App\Model\ArticleModel;
+
+
+require 'app/config.php';
 require 'functions.php';
 
 $flashMessage = null;
