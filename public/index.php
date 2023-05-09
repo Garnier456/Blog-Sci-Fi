@@ -11,10 +11,13 @@ require '../lib/functions.php';
 
 // Récupération du path de l'URL
 
+
 $path = str_replace(BASE_URL, '', $_SERVER['REQUEST_URI']);
-$path = str_replace('/BlogSciFi', '', $path);
-$path = str_replace('/BlogSciFi/public/index.php', '', $path);
+$path = str_replace('/BlogSciFi/public', '', $path);
+$path = str_replace('/index.php', '', $path);
 $path = explode('?', $path)[0];
+var_dump($path);
+
 
 if ($path == '') {
     $path = '/';

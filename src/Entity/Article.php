@@ -7,7 +7,7 @@ use DateTime;
 class Article
 {
 
-  private int $idArticle = 0;
+  private int $idArticle;
   private string $title;
   private string $summary;
   private string $content;
@@ -27,13 +27,13 @@ class Article
   }
 
 
-  public function getArticleId(): int
+  public function getidArticle(): int
   {
     return $this->idArticle;
   }
 
 
-  public function setArticleId(int $idArticle): self
+  public function setidArticle(int $idArticle): self
   {
     $this->idArticle = $idArticle;
 

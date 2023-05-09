@@ -423,7 +423,7 @@ function constructUrl(string $routeName, array $params = [])
         throw new Exception('ERREUR : pas de route nommée ' . $routeName);
     }
 
-    $url = BASE_URL . '/index.php' . ROUTES[$routeName]['path'];
+    $url = BASE_URL . 'index.php' . ROUTES[$routeName]['path'];
 
     if ($params) {
         $url .= '?' . http_build_query($params);

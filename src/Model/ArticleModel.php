@@ -29,4 +29,19 @@ class ArticleModel extends AbstractModel
   return $articles;
   }
 
+  function getOneArticle(int $idArticle)
+    {
+      $sql = "SELECT *
+      FROM article
+      WHERE idArticle = ?";
+
+        $result = $this->db->getOneResult($sql, [$idArticle]);
+
+        if (!$result) {
+            return null;
+        }
+
+        return new Article($result);
+    }
+
 }

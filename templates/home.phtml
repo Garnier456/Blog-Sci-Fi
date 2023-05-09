@@ -19,8 +19,9 @@
                             <h2><?= $article->getTitle(); ?></h2>
                             <p><?= $article->getSummary(); ?></p>
                             <span>
-                                <p>by <?= getUserName($article->getArticleId()) ?></p>
-                                <a href="article.php?id=<?= $article->getArticleId() ?>">Lire la suite</a>
+                                <p>by <?= getUserName(constructUrl('article', ['id' => $article->getIdArticle()])) ?></p>
+                                <a href="<?= constructUrl('article', ['id' => $article->getIdArticle()]); ?>">Lire la suite</a>
+                                <p> <?= constructUrl('article', ['id' => $article->getIdArticle()]); ?> </p>
                             </span>
                         </div>
                     </article>
@@ -30,13 +31,13 @@
 
         <div class="col-1">
             <div class="content-column">
-                <?php foreach ($articles as $article) : ?>
+            <?php foreach ($articles as $article) : ?>
                     <article class="standard-article">
                         <div class="img-article" style="background-image: url('<?= $article->getImage(); ?>')">
                             <div class="category-article">
                                 <div>
-                                    <img src=" <?= getCategoryIcon($article->getArticleId()) ?>" alt="">
-                                    <a><?= getCategoryName($article->getArticleId()) ?></a>
+                                    <img src=" <?= $article->getCategoryIcon()?>" alt="">
+                                    <a><?= $article->getCategoryName() ?></a>
                                 </div>
                                 <time><?= $article->getFormattedCreatedAt(); ?></time>
                             </div>
@@ -46,8 +47,8 @@
                             <h2><?= $article->getTitle(); ?></h2>
                             <p><?= $article->getSummary(); ?></p>
                             <span>
-                                <p>by <?= getUserName($article->getArticleId()) ?></p>
-                                <a href="article.php?id=<?= $article->getArticleId() ?>">Lire la suite</a>
+                                <p>by <?= getUserName(constructUrl('article', ['id' => $article->getIdArticle()])) ?></p>
+                                <a href="<?= constructUrl('article', ['id' => $article->getIdArticle()]); ?>">Lire la suite</a>
                             </span>
                         </div>
                     </article>
