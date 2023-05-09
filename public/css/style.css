@@ -20,7 +20,7 @@ header > div {
   justify-content: center;
   align-items: center;
   height: 200px;
-  background-image: url("images/background-header.jpg");
+  background-image: url(../images/background-header.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 40%;

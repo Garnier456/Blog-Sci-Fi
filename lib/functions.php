@@ -99,7 +99,7 @@ function getUserByEmail($email)
     global $pdo;
 
     $sql = "SELECT *
-            FROM users
+            FROM user
             WHERE email = ?";
 
     $query = $pdo->prepare($sql);
@@ -118,46 +118,46 @@ function verifyPassword($password, $hash)
                     ****************/
 
 
-// function getLastArticles() {
-//     global $pdo;
+function getLastArticles() {
+    global $pdo;
 
-//     $sql = "SELECT *
-//             FROM articles
-//             ORDER BY id DESC
-//             LIMIT 10";
+    $sql = "SELECT *
+            FROM article
+            ORDER BY idArticle DESC
+            LIMIT 10";
 
-//     $data = $pdo->prepare($sql);
-//     $data->execute();
+    $data = $pdo->prepare($sql);
+    $data->execute();
 
-//     return $data->fetchAll();
-// }
+    return $data->fetchAll();
+}
 
-// function getLast3Articles()  {
-//     global $pdo;
+function getLast3Articles()  {
+    global $pdo;
 
-//     $sql = "SELECT *
-//             FROM articles
-//             ORDER BY id DESC
-//             LIMIT 3";
+    $sql = "SELECT *
+            FROM article
+            ORDER BY idArticle DESC
+            LIMIT 3";
 
-//     $data = $pdo->prepare($sql);
-//     $data->execute();
+    $data = $pdo->prepare($sql);
+    $data->execute();
 
-//     return $data->fetchAll();
-// }
+    return $data->fetchAll();
+}
 
-// function getArticle($id) {
-//     global $pdo;
+function getArticle($id) {
+    global $pdo;
 
-//     $sql = "SELECT *
-//             FROM articles
-//             WHERE id = ?";
+    $sql = "SELECT *
+            FROM articles
+            WHERE id = ?";
 
-//     $data = $pdo->prepare($sql);
-//     $data->execute([$id]);
+    $data = $pdo->prepare($sql);
+    $data->execute([$id]);
 
-//     return $data->fetch();
-// }
+    return $data->fetch();
+}
 
 
 function addComment($author, $comment, $article_id) {
@@ -213,16 +213,16 @@ function getUsers() {
     return $data->fetchAll();
 }
 
-function getUserName($article_id) {
+function getUserName($idArticle) {
     global $pdo;
 
-    $sql = "SELECT users.username
-            FROM articles
-            INNER JOIN users ON articles.user_id = users.id
-            WHERE articles.id = ?";
+    $sql = "SELECT user.username
+            FROM article
+            INNER JOIN user ON article.userId = user.idUser
+            WHERE article.idArticle = ?";
 
     $data = $pdo->prepare($sql);
-    $data->execute([$article_id]);
+    $data->execute([$idArticle]);
 
     $result = $data->fetch();
 
@@ -233,16 +233,16 @@ function getUserName($article_id) {
     }
 }
 
-function getCategoryName($article_id) {
+function getCategoryName($articleId) {
     global $pdo;
 
-    $sql = "SELECT categories.name
-            FROM articles
-            INNER JOIN categories ON articles.category_id = categories.id
-            WHERE articles.id = ?";
+    $sql = "SELECT category.name
+            FROM article
+            INNER JOIN category ON article.categoryId = category.idCategory
+            WHERE article.idArticle = ?";
 
     $data = $pdo->prepare($sql);
-    $data->execute([$article_id]);
+    $data->execute([$articleId]);
 
     $result = $data->fetch();
 
@@ -253,32 +253,32 @@ function getCategoryName($article_id) {
     }
 }
 
-function getCategoryIcon($article_id) {
+function getCategoryIcon($articleId) {
     global $pdo;
 
-    $sql = "SELECT categories.icons
-            FROM articles
-            INNER JOIN categories ON articles.category_id = categories.id
-            WHERE articles.id = ?";
+    $sql = "SELECT category.icon
+            FROM article
+            INNER JOIN category ON article.categoryId = category.idCategory
+            WHERE article.idArticle = ?";
 
     $data = $pdo->prepare($sql);
-    $data->execute([$article_id]);
+    $data->execute([$articleId]);
 
     $result = $data->fetch();
 
     if ($result) {
-        return $result['icons'];
+        return $result['icon'];
     } else {
         return false;
     }
 }
- 
+
 function getDayFact() {
     global $pdo;
 
-    $sql = "SELECT content 
-            FROM facts 
-            ORDER BY RAND() 
+    $sql = "SELECT content
+            FROM fact
+            ORDER BY RAND()
             LIMIT 1";
 
     $stmt = $pdo->prepare($sql);
@@ -312,81 +312,81 @@ function banned($id) {
     }
 }
 
-// function suppArticle($id) {
-//     global $pdo;
+function suppArticle($id) {
+    global $pdo;
 
-//     $sql = "SELECT *
-//             FROM articles
-//             WHERE id= ?";
+    $sql = "SELECT *
+            FROM articles
+            WHERE id= ?";
 
-//     $dataArticle = $pdo->prepare($sql);
-//     $dataArticle->execute([$id]);
+    $dataArticle = $pdo->prepare($sql);
+    $dataArticle->execute([$id]);
 
-//     if($dataArticle->rowCount() > 0) {
-//         $sql = "DELETE
-//                 FROM articles
-//                 WHERE id= ?";
+    if($dataArticle->rowCount() > 0) {
+        $sql = "DELETE
+                FROM articles
+                WHERE id= ?";
 
-//         $data = $pdo->prepare($sql);
-//         $data->execute([$id]);
+        $data = $pdo->prepare($sql);
+        $data->execute([$id]);
 
-//         header('Location:admin.php');
-//     } else {
-//         echo 'aucun article trouvé';
-//     }
-// }
+        header('Location:admin.php');
+    } else {
+        echo 'aucun article trouvé';
+    }
+}
 
-// function insertArticle($title, $content, $intro, $image, $category, $user_id) {
-//     global $pdo;
+function insertArticle($title, $content, $intro, $image, $category, $user_id) {
+    global $pdo;
 
-//     $sql = "INSERT INTO articles
-//             (title, content, intro, image, category_id, user_id, created_at)
-//             VALUES (?, ?, ?, ?, ?, ?, NOW())";
+    $sql = "INSERT INTO articles
+            (title, content, intro, image, category_id, user_id, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
-//     // Récupérer l'id de la catégorie
-//     $query = $pdo->prepare("SELECT id FROM categories WHERE name = ?");
-//     $query->execute([$category]);
-//     $category_id = $query->fetch()['id'];
+    // Récupérer l'id de la catégorie
+    $query = $pdo->prepare("SELECT id FROM categories WHERE name = ?");
+    $query->execute([$category]);
+    $category_id = $query->fetch()['id'];
 
-//     // Insérer le nouvel article en utilisant l'id de la catégorie et de l'utilisateur
-//     $data = $pdo->prepare($sql);
-//     $data->execute([$title, $content, $intro, $image, $category_id, $user_id]);
+    // Insérer le nouvel article en utilisant l'id de la catégorie et de l'utilisateur
+    $data = $pdo->prepare($sql);
+    $data->execute([$title, $content, $intro, $image, $category_id, $user_id]);
 
-//     return $data;
-// }
+    return $data;
+}
 
 
-// function modifierArticle($id) {
-//     global $pdo;
+function modifierArticle($id) {
+    global $pdo;
 
-//     $sql = "SELECT *
-//             FROM articles
-//             WHERE id = ?";
+    $sql = "SELECT *
+            FROM articles
+            WHERE id = ?";
 
-//     $data = $pdo->prepare($sql);
-//     $data->execute([$id]);
+    $data = $pdo->prepare($sql);
+    $data->execute([$id]);
 
-//     return $data->fetch();
-// }
+    return $data->fetch();
+}
 
-// function updateArticle($titre, $contenu, $id) {
-//     global $pdo;
+function updateArticle($titre, $contenu, $id) {
+    global $pdo;
 
-//     $sql = "UPDATE articles
-//             SET title = ?, content = ?
-//             WHERE id = ?";
+    $sql = "UPDATE articles
+            SET title = ?, content = ?
+            WHERE id = ?";
 
-//     $data = $pdo->prepare($sql);
-//     $data->execute([$titre, $contenu, $id]);
+    $data = $pdo->prepare($sql);
+    $data->execute([$titre, $contenu, $id]);
 
-//     return $data->fetch();
-// }
+    return $data->fetch();
+}
 
 function insertSaveArticle($userId, $articleId) {
     global $pdo;
 
-    $sql = "INSERT INTO articles_saves 
-            (id_user, id_article) 
+    $sql = "INSERT INTO articles_saves
+            (id_user, id_article)
             VALUES (?, ?)";
 
     $stmt = $pdo->prepare($sql);
@@ -397,7 +397,7 @@ function checkSaveArticle($userId, $articleId) {
     global $pdo;
 
     $sql = "SELECT *
-            FROM articles_saves 
+            FROM articles_saves
             WHERE id_article = ? AND id_user = ?";
 
     $stmt = $pdo->prepare($sql);
@@ -408,4 +408,26 @@ function checkSaveArticle($userId, $articleId) {
     } else {
         return false;
     }
+}
+
+
+function asset(string $path)
+{
+    return BASE_URL . '/' . $path;
+}
+
+function constructUrl(string $routeName, array $params = [])
+{
+    // Si la route donnée en paramètre n'existe pas on lance une exception
+    if (!array_key_exists($routeName, ROUTES)) {
+        throw new Exception('ERREUR : pas de route nommée ' . $routeName);
+    }
+
+    $url = BASE_URL . '/index.php' . ROUTES[$routeName]['path'];
+
+    if ($params) {
+        $url .= '?' . http_build_query($params);
+    }
+
+    return $url;
 }

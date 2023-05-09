@@ -1,7 +1,3 @@
-<!-- Message flash le cas échéant -->
-<?php if ($flashMessage != null) : ?>
-    <p><?= $flashMessage; ?></p>
-<?php endif; ?>
 
 <section class="columns-container">
     <div class="wrapper">
@@ -9,22 +5,22 @@
             <div class="content-column">
                 <?php foreach ($articles as $article) : ?>
                     <article class="standard-article">
-                        <div class="img-article" style="background-image: url('<?= $article['image'] ?>')">
+                        <div class="img-article" style="background-image: url('<?= $article->getImage(); ?>')">
                             <div class="category-article">
                                 <div>
-                                    <img src=" <?= getCategoryIcon($article['id']) ?>" alt="">
-                                    <a><?= getCategoryName($article['id']) ?></a>
+                                    <img src=" <?= $article->getCategoryIcon()?>" alt="">
+                                    <a><?= $article->getCategoryName() ?></a>
                                 </div>
-                                <time><?= $article['created_at'] ?></time>
+                                <time><?= $article->getFormattedCreatedAt(); ?></time>
                             </div>
                         </div>
 
                         <div class="content-article">
-                            <h2><?= $article['title'] ?></h2>
-                            <p><?= $article['intro'] ?></p>
+                            <h2><?= $article->getTitle(); ?></h2>
+                            <p><?= $article->getSummary(); ?></p>
                             <span>
-                                <p>by <?= getUserName($article['id']) ?></p>
-                                <a href="article.php?id=<?= $article['id'] ?>">Lire la suite</a>
+                                <p>by <?= getUserName($article->getArticleId()) ?></p>
+                                <a href="article.php?id=<?= $article->getArticleId() ?>">Lire la suite</a>
                             </span>
                         </div>
                     </article>
@@ -32,26 +28,26 @@
             </div>
         </div>
 
-        <div class="col-2">
+        <div class="col-1">
             <div class="content-column">
                 <?php foreach ($articles as $article) : ?>
                     <article class="standard-article">
-                        <div class="img-article" style="background-image: url('<?= $article['image'] ?>')">
+                        <div class="img-article" style="background-image: url('<?= $article->getImage(); ?>')">
                             <div class="category-article">
                                 <div>
-                                    <img src=" <?= getCategoryIcon($article['id']) ?>" alt="">
-                                    <a><?= getCategoryName($article['id']) ?></a>
+                                    <img src=" <?= getCategoryIcon($article->getArticleId()) ?>" alt="">
+                                    <a><?= getCategoryName($article->getArticleId()) ?></a>
                                 </div>
-                                <time><?= $article['created_at'] ?></time>
+                                <time><?= $article->getFormattedCreatedAt(); ?></time>
                             </div>
                         </div>
 
                         <div class="content-article">
-                            <h2><?= $article['title'] ?></h2>
-                            <p><?= $article['intro'] ?></p>
+                            <h2><?= $article->getTitle(); ?></h2>
+                            <p><?= $article->getSummary(); ?></p>
                             <span>
-                                <p>by <?= getUserName($article['id']) ?></p>
-                                <a href="article.php?id=<?= $article['id'] ?>">Lire la suite</a>
+                                <p>by <?= getUserName($article->getArticleId()) ?></p>
+                                <a href="article.php?id=<?= $article->getArticleId() ?>">Lire la suite</a>
                             </span>
                         </div>
                     </article>
@@ -75,7 +71,7 @@
                     </div>
 
                     <h2><?= $topArticle['title'] ?></h2>
-                    <p><?= $topArticle['intro'] ?></p>
+                    <p><?= $topArticle['summary'] ?></p>
                 </article>
             <?php endforeach; ?>
         </div>
