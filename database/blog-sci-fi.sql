@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 10, 2023 at 11:06 AM
+-- Generation Time: May 10, 2023 at 01:31 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -56,7 +56,7 @@ INSERT INTO `article` (`idArticle`, `title`, `summary`, `content`, `image`, `cre
 --
 
 CREATE TABLE `articles_saves` (
-  `id` int NOT NULL,
+  `id_articles_saves` int NOT NULL,
   `id_user` int NOT NULL,
   `id_article` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -65,7 +65,7 @@ CREATE TABLE `articles_saves` (
 -- Dumping data for table `articles_saves`
 --
 
-INSERT INTO `articles_saves` (`id`, `id_user`, `id_article`) VALUES
+INSERT INTO `articles_saves` (`id_articles_saves`, `id_user`, `id_article`) VALUES
 (1, 11, 44),
 (5, 11, 44);
 
@@ -106,6 +106,14 @@ CREATE TABLE `comment` (
   `articleId` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`idComment`, `nickname`, `content`, `createdAt`, `articleId`) VALUES
+(14, 'slùd,gùsdl,g', 'ùsdvms;m;smmqms;sqm', '2023-05-10 13:28:11', 43),
+(15, 'kfpzkfpzkpzf', 'ùfùzf;ùzfsfsfs', '2023-05-10 13:31:25', 43);
+
 -- --------------------------------------------------------
 
 --
@@ -113,7 +121,7 @@ CREATE TABLE `comment` (
 --
 
 CREATE TABLE `fact` (
-  `id` int NOT NULL,
+  `idFact` int NOT NULL,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -121,7 +129,7 @@ CREATE TABLE `fact` (
 -- Dumping data for table `fact`
 --
 
-INSERT INTO `fact` (`id`, `content`) VALUES
+INSERT INTO `fact` (`idFact`, `content`) VALUES
 (1, 'The phrase ‘parallel universe’ was first used in H. G. Wells’ 1923 novel Men like Gods.\r\n\r\n');
 
 -- --------------------------------------------------------
@@ -163,7 +171,7 @@ ALTER TABLE `article`
 -- Indexes for table `articles_saves`
 --
 ALTER TABLE `articles_saves`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_articles_saves`),
   ADD KEY `fk_user_save` (`id_user`),
   ADD KEY `fk_article_save` (`id_article`);
 
@@ -184,7 +192,7 @@ ALTER TABLE `comment`
 -- Indexes for table `fact`
 --
 ALTER TABLE `fact`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`idFact`);
 
 --
 -- Indexes for table `user`
@@ -208,7 +216,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `articles_saves`
 --
 ALTER TABLE `articles_saves`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_articles_saves` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -220,13 +228,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `idComment` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idComment` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `fact`
 --
 ALTER TABLE `fact`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idFact` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
