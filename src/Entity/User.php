@@ -6,26 +6,20 @@ class User
 {
 
   private int $idUser;
-  private string $name;
+  private string $userName;
   private string $email;
   private string $password;
-  private int $is_admin;
+  private int $isAdmin;
 
-  public function __construct(
-    int $idUser,
-    string $name,
-    string $email,
-    string $password,
-    int $is_admin
-  ) {
-    $this->idUser = $idUser;
-    $this->name = $name;
-    $this->email = $email;
-    $this->password = $password;
-    $this->is_admin = $is_admin;
+  public function __construct(array $data = [])
+  {
+      foreach ($data as $propertyName => $value) {
+          $setter = 'set' . ucfirst($propertyName);
+          if (method_exists($this, $setter)) {
+              $this->$setter($value);
+          }
+      }
   }
-
-
 
 
   /**
@@ -49,17 +43,17 @@ class User
   /**
    * Get the value of name
    */
-  public function getName(): string
+  public function getUserName(): string
   {
-    return $this->name;
+    return $this->userName;
   }
 
   /**
    * Set the value of name
    */
-  public function setName(string $name): self
+  public function setUserName(string $userName): self
   {
-    $this->name = $name;
+    $this->userName = $userName;
 
     return $this;
   }
@@ -105,15 +99,15 @@ class User
    */
   public function getIsAdmin(): int
   {
-    return $this->is_admin;
+    return $this->isAdmin;
   }
 
   /**
    * Set the value of is_admin
    */
-  public function setIsAdmin(int $is_admin): self
+  public function setIsAdmin(int $isAdmin): self
   {
-    $this->is_admin = $is_admin;
+    $this->isAdmin = $isAdmin;
 
     return $this;
   }

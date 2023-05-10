@@ -4,8 +4,8 @@
 <button class="btn-save" data-article-id="<?= $id ?>">Enregistrer</button>
 
 <form action="article.php?id=<?= constructUrl('article', ['id' => $article->getIdArticle()]) ?>" method="POST">
-    <label for="author">Pseudo :</label>
-    <input type="text" name="author" id="author" value="<?php if (isset($author)) echo $author ?>">
+    <label for="nickname">Pseudo :</label>
+    <input type="text" name="nickname" id="nickname" value="<?php if (isset($nickname)) echo $author ?>">
 
     <label for="comment">Commentaire :</label>
     <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
@@ -15,7 +15,7 @@
 <h2>Commentaires :</h2>
 
 <?php foreach ($comments as $com) : ?>
-    <h3><?= $com['author'] ?></h3>
-    <time><?= $com['created_at'] ?></time>
+    <h3><?= $com['nickname'] ?></h3>
+    <time><?= $com['createdAt'] ?></time>
     <p><?= $com['content'] ?></p>
 <?php endforeach; ?>

@@ -118,48 +118,6 @@ function verifyPassword($password, $hash)
                     ****************/
 
 
-function getLastArticles() {
-    global $pdo;
-
-    $sql = "SELECT *
-            FROM article
-            ORDER BY idArticle DESC
-            LIMIT 10";
-
-    $data = $pdo->prepare($sql);
-    $data->execute();
-
-    return $data->fetchAll();
-}
-
-function getLast3Articles()  {
-    global $pdo;
-
-    $sql = "SELECT *
-            FROM article
-            ORDER BY idArticle DESC
-            LIMIT 3";
-
-    $data = $pdo->prepare($sql);
-    $data->execute();
-
-    return $data->fetchAll();
-}
-
-function getArticle($id) {
-    global $pdo;
-
-    $sql = "SELECT *
-            FROM articles
-            WHERE id = ?";
-
-    $data = $pdo->prepare($sql);
-    $data->execute([$id]);
-
-    return $data->fetch();
-}
-
-
 function addComment($author, $comment, $article_id) {
     global $pdo;
 
@@ -197,81 +155,6 @@ function getAllComments() {
     return $data->fetchAll();
 }
 
-
-
-function getUsers() {
-    global $pdo;
-
-    $sql = "SELECT *
-    FROM users
-    ORDER BY id DESC
-    LIMIT 10";
-
-    $data = $pdo->prepare($sql);
-    $data->execute();
-
-    return $data->fetchAll();
-}
-
-function getUserName($idArticle) {
-    global $pdo;
-
-    $sql = "SELECT user.username
-            FROM article
-            INNER JOIN user ON article.userId = user.idUser
-            WHERE article.idArticle = ?";
-
-    $data = $pdo->prepare($sql);
-    $data->execute([$idArticle]);
-
-    $result = $data->fetch();
-
-    if ($result) {
-        return $result['username'];
-    } else {
-        return false;
-    }
-}
-
-function getCategoryName($articleId) {
-    global $pdo;
-
-    $sql = "SELECT category.name
-            FROM article
-            INNER JOIN category ON article.categoryId = category.idCategory
-            WHERE article.idArticle = ?";
-
-    $data = $pdo->prepare($sql);
-    $data->execute([$articleId]);
-
-    $result = $data->fetch();
-
-    if ($result) {
-        return $result['name'];
-    } else {
-        return false;
-    }
-}
-
-function getCategoryIcon($articleId) {
-    global $pdo;
-
-    $sql = "SELECT category.icon
-            FROM article
-            INNER JOIN category ON article.categoryId = category.idCategory
-            WHERE article.idArticle = ?";
-
-    $data = $pdo->prepare($sql);
-    $data->execute([$articleId]);
-
-    $result = $data->fetch();
-
-    if ($result) {
-        return $result['icon'];
-    } else {
-        return false;
-    }
-}
 
 function getDayFact() {
     global $pdo;

@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-class category
+class Category
 {
 
-    private int $idCategory = 0;
-    private string $name = "";
-    private string $icon = "";
+    private int $idCategory;
+    private string $name;
+    private string $icon;
 
     public function __construct(array $data = [])
     {

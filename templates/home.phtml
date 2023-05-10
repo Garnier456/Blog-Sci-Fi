@@ -19,9 +19,8 @@
                             <h2><?= $article->getTitle(); ?></h2>
                             <p><?= $article->getSummary(); ?></p>
                             <span>
-                                <p>by <?= getUserName(constructUrl('article', ['id' => $article->getIdArticle()])) ?></p>
+                                <p>by <?= $article->getUserName() ?></p>
                                 <a href="<?= constructUrl('article', ['id' => $article->getIdArticle()]); ?>">Lire la suite</a>
-                                <p> <?= constructUrl('article', ['id' => $article->getIdArticle()]); ?> </p>
                             </span>
                         </div>
                     </article>
@@ -47,7 +46,7 @@
                             <h2><?= $article->getTitle(); ?></h2>
                             <p><?= $article->getSummary(); ?></p>
                             <span>
-                                <p>by <?= getUserName(constructUrl('article', ['id' => $article->getIdArticle()])) ?></p>
+                                <p>by <?= $article->getUserName() ?></p>
                                 <a href="<?= constructUrl('article', ['id' => $article->getIdArticle()]); ?>">Lire la suite</a>
                             </span>
                         </div>
@@ -68,11 +67,11 @@
         <div id="top-article-box">
             <?php foreach ($topArticles as $topArticle) : ?>
                 <article>
-                    <div id="img-top" style="background-image: url('<?= $topArticle['image'] ?>')">
+                    <div id="img-top" style="background-image: url('<?= $topArticle->getImage() ?>')">
                     </div>
 
-                    <h2><?= $topArticle['title'] ?></h2>
-                    <p><?= $topArticle['summary'] ?></p>
+                    <h2><?= $topArticle->getTitle() ?></h2>
+                    <p><?= $topArticle->getSummary() ?></p>
                 </article>
             <?php endforeach; ?>
         </div>

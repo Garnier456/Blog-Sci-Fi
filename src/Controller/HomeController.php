@@ -11,6 +11,7 @@ class HomeController {
         // Sélection des 3 derniers articles
         $articleModel = new ArticleModel();
         $articles = $articleModel->getLastArticles();
+        $topArticles = $articleModel->get3LastArticles();
 
         // Messages flash
         if (array_key_exists('flash', $_SESSION) && $_SESSION['flash']) {

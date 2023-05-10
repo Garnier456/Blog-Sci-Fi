@@ -13,7 +13,7 @@ class Article
   private string $content;
   private string $image;
   private DateTime $createdAt;
-  private int $userId;
+  private User $user;
   private Category $category;
 
   public function __construct(array $data = [])
@@ -27,13 +27,13 @@ class Article
   }
 
 
-  public function getidArticle(): int
+  public function getIdArticle(): int
   {
     return $this->idArticle;
   }
 
 
-  public function setidArticle(int $idArticle): self
+  public function setIdArticle(int $idArticle): self
   {
     $this->idArticle = $idArticle;
 
@@ -119,17 +119,21 @@ class Article
         return $this->createdAt->format('d/m/Y');
     }
 
-  public function getUserId(): int
+    public function setUser(User $user): self
   {
-    return $this->userId;
-  }
-
-
-  public function setUserId(int $userId): self
-  {
-    $this->userId = $userId;
+    $this->user = $user;
 
     return $this;
+  }
+
+    public function getUser(): User
+    {
+      return $this->user;
+    }
+
+  public function getUserName(): string
+  {
+      return $this->user->getUserName();
   }
 
 
