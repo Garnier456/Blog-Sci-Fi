@@ -48,8 +48,9 @@ class ArticleController
                 $_SESSION['flashbag'] = 'Votre commentaire a bien été ajouté';
 
                 // Redirection vers la page Article
-                header('Location: ' . constructUrl('article', ['id' => $idArticle]));
+                header('Location: article?id=' . $idArticle);
                 exit;
+
             }
         }
         
