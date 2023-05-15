@@ -21,6 +21,6 @@ class HomeController {
 
         // Affichage : inclusion du template
         $template = 'home';
-        include '../templates/base.phtml';
+        include TEMPLATE_DIR .'/base.phtml';
     }
 }

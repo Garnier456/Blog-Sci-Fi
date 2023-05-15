@@ -14,13 +14,13 @@ class ArticleModel extends AbstractModel
   function getLastArticles()
   {
 
-    $sql = $sql = 'SELECT * 
+    $sql = $sql = 'SELECT *
     FROM article AS A
-    INNER JOIN category AS C 
+    INNER JOIN category AS C
     ON A.categoryId = C.idCategory
-    INNER JOIN user AS U 
-    ON A.userId = U.idUser 
-    ORDER BY createdAt DESC 
+    INNER JOIN user AS U
+    ON A.userId = U.idUser
+    ORDER BY createdAt DESC
     LIMIT 10';
 
 
@@ -39,13 +39,13 @@ class ArticleModel extends AbstractModel
   function get3LastArticles()
   {
 
-    $sql = $sql = 'SELECT * 
+    $sql = $sql = 'SELECT *
     FROM article AS A
-    INNER JOIN category AS C 
+    INNER JOIN category AS C
     ON A.categoryId = C.idCategory
-    INNER JOIN user AS U 
-    ON A.userId = U.idUser 
-    ORDER BY createdAt DESC 
+    INNER JOIN user AS U
+    ON A.userId = U.idUser
+    ORDER BY createdAt DESC
     LIMIT 3';
 
     $results = $this->db->getAllResults($sql);
@@ -74,4 +74,17 @@ class ArticleModel extends AbstractModel
 
     return new Article($result);
   }
+
+  public function addArticle(Article $article)
+    {
+        $sql = 'INSERT INTO article (title, content, categoryId, image, createdAt)
+                VALUES (?,?,?,?, NOW())';
+
+        return $this->db->insert($sql, [
+            $article->getTitle(),
+            $article->getContent(),
+            $article->getCategory()->getIdCategory(),
+            $article->getImage()
+        ]);
+    }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,41 +16,29 @@
 
 <body>
     <header>
-        <div>
-            <h1>Titre</h1>
-        </div>
-
-        <nav>
-            <div>
-                <a href="index.php">Accueil</a>
-                <a href="">Film</a>
-                <a href="">Série</a>
-                <a href="">Livre</a>
-                <a href="">Comics</a>
-                <a href="">Jeux Vidéo</a>
-                <a href="">A propos</a>
-            </div>
-
-            <div>
-                <?php if (!isConnected()): ?>
-                    <a href="login.php">Connexion</a>
-                    <a href="signup.php">S'inscrire</a>
-                <?php else: ?>
-                    <?php if (isAdmin()): ?>
-                        <a href="admin.php">Dashboard</a>
-                    <?php else: ?>
-                        <a href="profile.php">Mon profil</a>
-                    <?php endif; ?>
-                    <a href="logout.php">Déconnexion</a>
-                <?php endif; ?>
-            </div>
-        </nav>
+        <h1>Mon super Blog</h1>
     </header>
 
-    <main>
-        <!-- inclusion du fichier de template -->
-        <?php include $template . '.phtml'; ?>
-    </main>
+        <nav>
+            <a href="<?=constructUrl('home');?>">Accueil</a>
+            <a href="<?=constructUrl('contact-form');?>">Contact</a>
+            <?php if ((new App\Service\UserSession())->getUser()):?>
+                <a href="<?=constructUrl('logout');?>">Déconnexion</a>
+            <?php else: ?>
+                <a href="<?=constructUrl('login');?>">Connexion</a>
+                <a href="<?=constructUrl('signup');?>">Créer un compte</a>
+            <?php endif; ?>
+        </nav>
 
+    <main>
+
+        <!-- Message flash -->
+        <?php if (isset($flashMessage) && $flashMessage): ?>
+            <p class="success"><?=$flashMessage;?></p>
+        <?php endif; ?>
+
+        <!-- Contenu de la page -->
+        <?php include TEMPLATE_DIR . '/' . $template . '.phtml'; ?>
+    </main>
 </body>
 </html>

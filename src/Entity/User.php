@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Service\UserRole;
+
 class User
 {
 
@@ -9,7 +11,7 @@ class User
   private string $userName;
   private string $email;
   private string $password;
-  private int $isAdmin;
+  private UserRole $role;
 
   public function __construct(array $data = [])
   {
@@ -95,20 +97,24 @@ class User
   }
 
   /**
-   * Get the value of is_admin
-   */
-  public function getIsAdmin(): int
-  {
-    return $this->isAdmin;
-  }
+     * Get the value of role
+     */
+    public function getRole(): UserRole
+    {
+        return $this->role;
+    }
 
-  /**
-   * Set the value of is_admin
-   */
-  public function setIsAdmin(int $isAdmin): self
-  {
-    $this->isAdmin = $isAdmin;
+    /**
+     * Set the value of role
+     */
+    public function setRole(string|UserRole $role): self
+    {
+        if (is_string($role)) {
+            $role = UserRole::from($role);
+        }
 
-    return $this;
-  }
+        $this->role = $role;
+
+        return $this;
+    }
 }

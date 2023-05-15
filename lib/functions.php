@@ -314,3 +314,19 @@ function constructUrl(string $routeName, array $params = [])
 
     return $url;
 }
+
+function slugify($string) {
+    // Remplace les caractères spéciaux par des tirets
+    $string = preg_replace('/[^\p{L}\p{N}]+/u', '-', $string);
+
+    // Convertit en minuscules
+    $string = mb_strtolower($string, 'UTF-8');
+
+    // Supprime les tirets en début et fin de chaîne
+    $string = trim($string, '-');
+
+    // Supprime les tirets répétés
+    $string = preg_replace('/-+/', '-', $string);
+
+    return $string;
+}

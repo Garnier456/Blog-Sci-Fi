@@ -1,5 +1,7 @@
 <?php
 
+use App\Service\UserSession;
+
 require '../vendor/autoload.php';
 
 session_start();
@@ -21,6 +23,14 @@ if ($path == '') {
     $path = '/';
 }
 
+if (strpos($path, '/admin') === 0) {
+    $userSession = new UserSession();
+    if (!$userSession->isAdmin()) {
+        http_response_code(404);
+        echo 'Page introuvable (admin interdit)';
+        exit;
+    }
+}
 ///////////////
 // ROUTING    //
 ////////////////

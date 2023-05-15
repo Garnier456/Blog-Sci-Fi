@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 10, 2023 at 01:31 PM
+-- Host: localhost:3306
+-- Generation Time: May 15, 2023 at 12:51 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -56,7 +56,7 @@ INSERT INTO `article` (`idArticle`, `title`, `summary`, `content`, `image`, `cre
 --
 
 CREATE TABLE `articles_saves` (
-  `id_articles_saves` int NOT NULL,
+  `id` int NOT NULL,
   `id_user` int NOT NULL,
   `id_article` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -65,7 +65,7 @@ CREATE TABLE `articles_saves` (
 -- Dumping data for table `articles_saves`
 --
 
-INSERT INTO `articles_saves` (`id_articles_saves`, `id_user`, `id_article`) VALUES
+INSERT INTO `articles_saves` (`id`, `id_user`, `id_article`) VALUES
 (1, 11, 44),
 (5, 11, 44);
 
@@ -99,20 +99,13 @@ INSERT INTO `category` (`idCategory`, `name`, `icon`) VALUES
 --
 
 CREATE TABLE `comment` (
-  `idComment` int NOT NULL,
-  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id` int NOT NULL,
+  `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `articleId` int NOT NULL
+  `created_at` datetime NOT NULL,
+  `article_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `comment`
---
-
-INSERT INTO `comment` (`idComment`, `nickname`, `content`, `createdAt`, `articleId`) VALUES
-(14, 'slùd,gùsdl,g', 'ùsdvms;m;smmqms;sqm', '2023-05-10 13:28:11', 43),
-(15, 'kfpzkfpzkpzf', 'ùfùzf;ùzfsfsfs', '2023-05-10 13:31:25', 43);
 
 -- --------------------------------------------------------
 
@@ -121,7 +114,7 @@ INSERT INTO `comment` (`idComment`, `nickname`, `content`, `createdAt`, `article
 --
 
 CREATE TABLE `fact` (
-  `idFact` int NOT NULL,
+  `id` int NOT NULL,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -129,7 +122,7 @@ CREATE TABLE `fact` (
 -- Dumping data for table `fact`
 --
 
-INSERT INTO `fact` (`idFact`, `content`) VALUES
+INSERT INTO `fact` (`id`, `content`) VALUES
 (1, 'The phrase ‘parallel universe’ was first used in H. G. Wells’ 1923 novel Men like Gods.\r\n\r\n');
 
 -- --------------------------------------------------------
@@ -143,17 +136,17 @@ CREATE TABLE `user` (
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `isAdmin` tinyint(1) NOT NULL DEFAULT '0'
+  `role` enum('USER','ADMIN') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'USER'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`idUser`, `username`, `email`, `password`, `isAdmin`) VALUES
-(11, 'Olivier', 'saturn-solar@outlook.com', '$2y$10$ahEEJRhTyuLa61y7cBXHiukShsyJysmDeGwao.4CVZ68cQ9JPK13S', 1),
-(12, 'toto', 'mr.ogarnier@gmail.com', '$2y$10$V4xHO3fxUZ.7aVDvweo/ce9OwlhrLrBKSkU19qJAlRnr.lZestRBK', 0),
-(13, 'Clément', 'kanzan@gmail.com', '$2y$10$mZIP3ltvnGDm8u90WiMvPe9/GwOTZlJf/ZcdnSTK9q3CZwYbbTuau', 0);
+INSERT INTO `user` (`idUser`, `username`, `email`, `password`, `role`) VALUES
+(11, 'Olivier', 'saturn-solar@outlook.com', '$2y$10$ahEEJRhTyuLa61y7cBXHiukShsyJysmDeGwao.4CVZ68cQ9JPK13S', 'USER'),
+(12, 'toto', 'mr.ogarnier@gmail.com', '$2y$10$V4xHO3fxUZ.7aVDvweo/ce9OwlhrLrBKSkU19qJAlRnr.lZestRBK', ''),
+(13, 'Clément', 'kanzan@gmail.com', '$2y$10$mZIP3ltvnGDm8u90WiMvPe9/GwOTZlJf/ZcdnSTK9q3CZwYbbTuau', '');
 
 --
 -- Indexes for dumped tables
@@ -171,7 +164,7 @@ ALTER TABLE `article`
 -- Indexes for table `articles_saves`
 --
 ALTER TABLE `articles_saves`
-  ADD PRIMARY KEY (`id_articles_saves`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user_save` (`id_user`),
   ADD KEY `fk_article_save` (`id_article`);
 
@@ -185,14 +178,14 @@ ALTER TABLE `category`
 -- Indexes for table `comment`
 --
 ALTER TABLE `comment`
-  ADD PRIMARY KEY (`idComment`),
-  ADD KEY `fk_comment` (`articleId`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_comment` (`article_id`);
 
 --
 -- Indexes for table `fact`
 --
 ALTER TABLE `fact`
-  ADD PRIMARY KEY (`idFact`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -216,7 +209,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `articles_saves`
 --
 ALTER TABLE `articles_saves`
-  MODIFY `id_articles_saves` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -228,13 +221,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `idComment` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `fact`
 --
 ALTER TABLE `fact`
-  MODIFY `idFact` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -264,7 +257,7 @@ ALTER TABLE `articles_saves`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `fk_comment` FOREIGN KEY (`articleId`) REFERENCES `article` (`idArticle`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_comment` FOREIGN KEY (`article_id`) REFERENCES `article` (`idArticle`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

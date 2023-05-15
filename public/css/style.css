@@ -15,7 +15,8 @@ main {
   margin: 10px 50px;
 }
 
-header > div {
+
+header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,10 +45,10 @@ nav div:first-child {
   margin-left: 10px;
 }
 
-nav div:last-child {
-  margin-right: 55px;
+nav form {
   display: flex;
   gap: 20px;
+  color: white;
 }
 
 nav a {
@@ -75,7 +76,7 @@ wrapper::-webkit-scrollbar {
 .col-2 {
   width: 50%;
   overflow-y: scroll;
-  height: 200vh; /* Changer la hauteur à votre préférence */
+  height: 110vh; /* Changer la hauteur à votre préférence */
 }
 
 .col-1::-webkit-scrollbar,
@@ -162,7 +163,7 @@ wrapper::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   gap: 60px;
-  align-items: center;
+  align-items: flex-end;
 }
 
 #right-block article {

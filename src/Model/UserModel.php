@@ -6,17 +6,17 @@ use App\Entity\User;
 use App\Core\AbstractModel;
 
 class UserModel extends AbstractModel {
-    
+
     public function addUser(User $user)
     {
         $sql = 'INSERT INTO user (username, email, password, isAdmin)
                 VALUES (?, ?, ?, NOW(), ?)';
 
         $values = [
-            $user->getUserName(), 
-            $user->getEmail(), 
+            $user->getUserName(),
+            $user->getEmail(),
             $user->getPassword(),
-            $user->getIsAdmin()
+            $user->getRole()->value
         ];
 
         return $this->db->insert($sql, $values);
@@ -24,7 +24,7 @@ class UserModel extends AbstractModel {
 
     public function getUserByEmail(string $email)
     {
-        $sql = 'SELECT * 
+        $sql = 'SELECT *
                 FROM user
                 WHERE email = ?';
 
