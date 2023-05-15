@@ -1,30 +1,21 @@
 <?php 
 
-// 1. Déclaration du namespace 
 namespace App\Core;
 
-// 2. Import de classes
 use PDO;
 
-// 3. Définition de la classe Database
 class Database {
 
-    /**
-     * Stocke l'objet PDO
-     */
+    
     private PDO $pdo;
 
-    /**
-     * Constructeur
-     */
+    
     public function __construct()
     {
         $this->pdo = $this->getPDOConnection();
     }
 
-    /**
-     * Connexion à la base de données
-     */
+   
     function getPDOConnection() {
 
         // Construction du Data Source Name

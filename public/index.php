@@ -13,7 +13,7 @@ require '../lib/functions.php';
 
 
 $path = str_replace(BASE_URL, '', $_SERVER['REQUEST_URI']);
-$path = str_replace('/Blog-Sci-Fi/public', '', $path);
+$path = str_replace('/Blog/public', '', $path);
 $path = str_replace('/index.php', '', $path);
 $path = explode('?', $path)[0];
 
