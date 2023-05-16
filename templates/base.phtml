@@ -20,7 +20,14 @@
     </header>
 
         <nav>
-            <a href="<?=constructUrl('home');?>">Accueil</a>
+            <div>
+                <a href="<?=constructUrl('home');?>">Accueil</a>
+                <a href="">Film</a>
+                <a href="">Série</a>
+                <a href="">Livre</a>
+                <a href="">Comics</a>
+                <a href="">Jeux Vidéo</a>
+            </div>
             <a href="<?=constructUrl('contact-form');?>">Contact</a>
             <?php if ((new App\Service\UserSession())->getUser()):?>
                 <a href="<?=constructUrl('logout');?>">Déconnexion</a>

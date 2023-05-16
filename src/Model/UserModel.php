@@ -9,18 +9,18 @@ class UserModel extends AbstractModel {
 
     public function addUser(User $user)
     {
-        $sql = 'INSERT INTO user (username, email, password, isAdmin)
-                VALUES (?, ?, ?, NOW(), ?)';
+        $sql = 'INSERT INTO user (username, email, password)
+                VALUES (?, ?, ?)';
 
         $values = [
             $user->getUserName(),
             $user->getEmail(),
             $user->getPassword(),
-            $user->getRole()->value
         ];
 
         return $this->db->insert($sql, $values);
     }
+
 
     public function getUserByEmail(string $email)
     {

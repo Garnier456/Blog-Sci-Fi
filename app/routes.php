@@ -50,7 +50,17 @@ $routes = [
         'path' => '/admin/article/new',
         'controller' => 'Admin\\AdminArticleController',
         'method' => 'new'
-    ]
+    ],
+    'admin_article_edit' => [
+        'path' => '/admin/article/edit',
+        'controller' => 'Admin\\AdminArticleController',
+        'method' => 'edit'
+    ],
+    'admin_article_delete' => [
+        'path' => '/admin/article/delete',
+        'controller' => 'Admin\\AdminArticleController',
+        'method' => 'delete'
+    ],
 ];
 
 return $routes;

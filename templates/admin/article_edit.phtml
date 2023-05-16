@@ -15,6 +15,13 @@
         </select>
     </div>
     <div>
+      <label for="summary">résumé :</label>
+      <input type="text" id="summary" name="summary"><?=$summary;?></input>
+      <?php if(isset($errors['summary'])):?>
+        <p class="error"><?=$errors['summary'];?></p>
+      <?php endif; ?>
+    </div>
+    <div>
       <label for="content">Contenu :</label>
       <textarea id="content" name="content"><?=$content;?></textarea>
       <?php if(isset($errors['content'])):?>
@@ -28,5 +35,5 @@
         <p class="error"><?=$errors['image'];?></p>
       <?php endif; ?>
     </div>
-    <input type="submit" value="Enregistrer" class="btn btn-primary">
+    <input type="submit" value="Modifier" class="btn btn-primary">
 </form>

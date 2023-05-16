@@ -79,4 +79,14 @@ class Database {
         return $this->lastInsertId();
     }
 
+    function update(string $sql, array $values = [])
+    {
+        $this->prepareAndExecute($sql, $values);
+    }
+
+    function delete(string $sql, array $values = [])
+    {
+        $this->prepareAndExecute($sql, $values);
+    }
+
 }
