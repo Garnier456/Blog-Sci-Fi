@@ -20,12 +20,11 @@
 
         <nav>
             <div>
-                <a href="<?=constructUrl('home');?>">Accueil</a>
-                <a href="">Film</a>
-                <a href="">Série</a>
-                <a href="">Livre</a>
-                <a href="">Comics</a>
-                <a href="">Jeux Vidéo</a>
+            <a href="<?= constructUrl('category', ['id' => 1]); ?>">Film</a>
+            <a href="<?= constructUrl('category', ['id' => 2]); ?>">Série</a>
+            <a href="<?= constructUrl('category', ['id' => 3]); ?>">Livre</a>
+            <a href="<?= constructUrl('category', ['id' => 4]); ?>">Comics</a>
+            <a href="<?= constructUrl('category', ['id' => 5]); ?>">Jeux Vidéo</a>
             </div>
             <?php if ((new App\Service\UserSession())->getUser()):?>
                 <a href="<?=constructUrl('logout');?>">Déconnexion</a>

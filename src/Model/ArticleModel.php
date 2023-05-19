@@ -66,6 +66,29 @@ class ArticleModel extends AbstractModel
   return new Article($articleData); // Instancie la classe Article avec les données de l'article
 }
 
+public function getArticlesByCategory($categoryId)
+{
+    $sql = 'SELECT A.*, U.*, C.*
+            FROM article AS A
+            INNER JOIN user AS U
+            ON A.userId = U.idUser
+            INNER JOIN category AS C 
+            ON A.categoryId = C.idCategory 
+            WHERE A.categoryId = ? 
+            ORDER BY A.createdAt DESC';
+
+    $results = $this->db->getAllResults($sql, [$categoryId]);
+
+    $articles = [];
+    foreach ($results as $result) {
+        $result['user'] = new User($result);
+        $result['category'] = new Category($result);
+        $articles[] = new Article($result);
+    }
+
+    return $articles;
+}
+
   function getLastArticles()
   {
 

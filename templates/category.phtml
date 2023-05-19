@@ -1,0 +1,17 @@
+<!-- category_articles.phtml -->
+
+<h2>Articles de la catégorie <?= $category['name']; ?></h2>
+
+<?php if (empty($articles)): ?>
+    <p>Aucun article trouvé dans cette catégorie.</p>
+<?php else: ?>
+    <ul>
+        <?php foreach ($articles as $article): ?>
+            <li>
+                <h3><?= $article['title']; ?></h3>
+                <p><?= $article['content']; ?></p>
+                <!-- Autres données de l'article à afficher -->
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

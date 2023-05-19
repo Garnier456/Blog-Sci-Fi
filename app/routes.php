@@ -11,6 +11,11 @@ $routes = [
         'controller' => 'ArticleController',
         'method' => 'index'
     ],
+    'category' => [
+        'path' => '/category',
+        'controller' => 'CategoryController',
+        'method' => 'index'
+    ],
     'ajax-save-article' => [
         'path' => '/saveArticle',
         'controller' => 'ArticleController',
