@@ -1,16 +1,22 @@
-// document.querySelector(".btn-save").addEventListener("click", function () {
-//   // Récupère l'identifiant de l'article à enregistrer
-//   const articleId = $(".btn-save").data('article-id');
+console.log('ok')
 
-//   // Envoie une requête Ajax au serveur pour enregistrer l'article
-//   $.ajax({
-//     type: "POST",
-//     url: "saveArticle.php",
-//     data: { articleId: articleId },
-//     dataType: "json",
-//     success: console.log("Article enregistré avec succès!"),
-//     error: console.log(
-//       "Une erreur est survenue lors de l'enregistrement de l'article: "
-//     ),
-//   });
-// });
+$(document).ready(function() {
+  $('#save-btn').click(function() {
+    let articleId = $(this).data('article-id'); // Obtenez l'identifiant de l'article à partir de votre page
+    saveArticle(articleId);
+  });
+});
+
+async function saveArticle(articleId) {
+  try {
+    await $.ajax({
+      url: 'saveArticle',
+      method: 'POST',
+      data: { action: 'saveArticle', id: articleId }
+    });
+    
+    console.log('Article sauvegardé avec succès');
+  } catch (error) {
+    console.error('Erreur lors de la sauvegarde de l\'article :', error);
+  }
+}

@@ -1,34 +1,5 @@
 <?php
                    
-function insertSaveArticle($userId, $articleId) {
-    global $pdo;
-
-    $sql = "INSERT INTO articles_saves
-            (id_user, id_article)
-            VALUES (?, ?)";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$userId, $articleId]);
-}
-
-function checkSaveArticle($userId, $articleId) {
-    global $pdo;
-
-    $sql = "SELECT *
-            FROM articles_saves
-            WHERE id_article = ? AND id_user = ?";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$userId, $articleId]);
-
-    if($stmt->rowCount() > 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-
 function asset(string $path)
 {
     return BASE_URL . '/' . $path;

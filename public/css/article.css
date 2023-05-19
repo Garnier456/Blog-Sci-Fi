@@ -1,0 +1,14 @@
+#article-page {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 80%;
+}
+
+#article-page div {
+  width: 80%;
+}
+
+#img-article-page {
+  width: 80%;
+}

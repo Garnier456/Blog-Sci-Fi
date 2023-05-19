@@ -220,7 +220,7 @@ class AdminArticleController {
         $articleId = (int)$_POST['id'];
 
         $articleModel = new ArticleModel();
-        $article = $articleModel->getOneArticle($articleId);
+        $article = $articleModel->getOneArticleById($articleId);
 
         if ($article) {
             $articleModel->deleteArticle($articleId);

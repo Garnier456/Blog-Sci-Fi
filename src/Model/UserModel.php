@@ -37,4 +37,28 @@ class UserModel extends AbstractModel {
         return new User($result);
     }
 
+    public function insertSaveArticle($userId, $IdArticle) {
+
+        $sql = "INSERT INTO articles_saves
+                (id_user, id_article)
+                VALUES (?, ?)";
+
+        $this->db->prepareAndExecute($sql, [$userId, $IdArticle]);
+    }
+    
+    function checkSaveArticle($userId, $IdArticle) {
+    
+        $sql = "SELECT *
+                FROM articles_saves
+                WHERE id_article = ? AND id_user = ?";
+    
+        $result = $this->db->getOneResult($sql, [$userId, $IdArticle]);
+
+        return var_dump($result);
+    
+        if($result) {
+            return true;
+        }
+    }
+
 }

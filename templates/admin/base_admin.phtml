@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon super blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?=asset('css/style.css');?>" />
+    <link rel="stylesheet" href="<?=asset('css/base.css');?>" />
 </head>
 <body>
-    <header class="container-md">
-        <h1><a href="<?=constructUrl('admin_dashboard');?>">Administration</a></h1>
+    <header>
         <nav>
+            <a href="<?=constructUrl('admin_dashboard');?>">Administration</a>
             <a href="<?=constructUrl('home');?>">Accueil</a>
             <a href="<?=constructUrl('logout');?>">Déconnexion</a>
         </nav>

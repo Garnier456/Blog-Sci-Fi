@@ -67,14 +67,13 @@
         <div id="top-article-box">
             <?php foreach ($topArticles as $topArticle) : ?>
                 <article>
-                    <div id="img-top" style="background-image: url('<?= $topArticle->getImage() ?>')">
+                    <div id="img-top" style="background-image: url('<?=asset('images/' . $topArticle->getImage())?>')">
                     </div>
-
-                    <h2><?= $topArticle->getTitle() ?></h2>
-                    <p><?= $topArticle->getSummary() ?></p>
                 </article>
             <?php endforeach; ?>
         </div>
     </div>
 
 </section>
+
+<script src="<?= asset("js/home.js") ?>"></script>

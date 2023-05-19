@@ -11,6 +11,61 @@ use App\Entity\User;
 class ArticleModel extends AbstractModel
 {
 
+  function getAllArticles()
+  {
+      $sql = 'SELECT * 
+              FROM article AS A
+              INNER JOIN user AS U
+              ON A.userId = U.idUser
+              INNER JOIN category AS C 
+              ON A.categoryId = C.idCategory 
+              ORDER BY createdAt DESC';
+  
+      $results = $this->db->getAllResults($sql);
+  
+      $articles = [];
+      foreach ($results as $result) {
+          $result['user'] = new User($result);
+          $result['category'] = new Category($result);
+          $articles[] = new Article($result);
+      }
+  
+      return $articles;
+  } 
+  
+  function getOneArticleById(int $idArticle)
+{
+  $sql = "SELECT A.*, U.*, C.*
+    FROM article AS A
+    INNER JOIN user AS U
+    ON A.userId = U.idUser
+    INNER JOIN category AS C 
+    ON A.categoryId = C.idCategory
+    WHERE idArticle = ?";
+
+  $result = $this->db->getOneResult($sql, [$idArticle]);
+
+  if (!$result) {
+    return null;
+  }
+
+  $user = new User($result); // Instancie la classe User avec les données de l'utilisateur
+  $category = new Category($result); // Instancie la classe Category avec les données de la catégorie
+
+  $articleData = [
+    'idArticle' => $result['idArticle'],
+    'title' => $result['title'],
+    'summary' => $result['summary'],
+    'image' => $result['image'],
+    'createdAt' => $result['createdAt'],
+    'content' => $result['content'],
+    'user' => $user, // Ajoute l'objet User à l'array des données de l'article
+    'category' => $category, // Ajoute l'objet Category à l'array des données de l'article
+  ];
+
+  return new Article($articleData); // Instancie la classe Article avec les données de l'article
+}
+
   function getLastArticles()
   {
 
@@ -60,42 +115,6 @@ class ArticleModel extends AbstractModel
     return $articles;
   }
 
-  function getAllArticles()
-  {
-      $sql = 'SELECT * 
-              FROM article AS A
-              INNER JOIN user AS U
-              ON A.userId = U.idUser
-              INNER JOIN category AS C 
-              ON A.categoryId = C.idCategory 
-              ORDER BY createdAt DESC';
-
-      $results = $this->db->getAllResults($sql);
-
-      $articles = [];
-      foreach ($results as $result) {
-          $result['user'] = new User($result);
-          $result['category'] = new Category($result);
-          $articles[] = new Article($result);
-      }
-
-      return $articles;
-  } 
-
-  function getOneArticle(int $idArticle)
-  {
-    $sql = "SELECT *
-      FROM article
-      WHERE idArticle = ?";
-
-    $result = $this->db->getOneResult($sql, [$idArticle]);
-
-    if (!$result) {
-      return null;
-    }
-
-    return new Article($result);
-  }
 
   public function addArticle(Article $article)
     {

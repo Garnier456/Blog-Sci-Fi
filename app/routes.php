@@ -11,20 +11,10 @@ $routes = [
         'controller' => 'ArticleController',
         'method' => 'index'
     ],
-    'contact-form' => [
-        'path' => '/contact',
-        'controller' => 'ContactController',
-        'method' => 'showForm'
-    ],
-    'ajax-send-contact-form' => [
-        'path' => '/ajax-contact',
-        'controller' => 'ContactController',
-        'method' => 'sendForm'
-    ],
-    'ajax-add-comment' => [
-        'path' => '/add-comment',
+    'ajax-save-article' => [
+        'path' => '/saveArticle',
         'controller' => 'ArticleController',
-        'method' => 'addAjaxComment'
+        'method' => 'saveArticle'
     ],
     'signup' => [
         'path' => '/signup',

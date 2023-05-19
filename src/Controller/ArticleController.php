@@ -5,6 +5,7 @@ namespace App\Controller;
 // Import de classes
 use App\Model\ArticleModel;
 use App\Model\CommentModel;
+use App\Model\UserModel;
 
 class ArticleController
 {
@@ -55,7 +56,7 @@ class ArticleController
         }
         
         // Récupération de l'article à afficher
-        $article = $articleModel->getOneArticle($idArticle);
+        $article = $articleModel->getOneArticleById($idArticle);
 
         // Vérification de l'existance de l'article
         if (!$article) {
@@ -76,6 +77,22 @@ class ArticleController
 
         $template = 'article';
         include '../templates/base.phtml';
+    }
+
+    public function saveArticle()
+    {
+        $userModel = new UserModel();
+
+        $user = $_SESSION['user'];
+        $idUser = $user->getIdUser();
+        
+        $idArticle = $_POST['id'];
+        dump($idArticle );
+
+
+        if ($userModel->checkSaveArticle($idUser, $idArticle)) {
+            $userModel->insertSaveArticle($idUser, $idArticle);
+          }
     }
 
     private function validateCommentForm(string $nickname, string $content)

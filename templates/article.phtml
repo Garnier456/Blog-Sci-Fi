@@ -1,21 +1,38 @@
-<h1><?= $article->getTitle() ?></h1>
-<time> <?= $article->getFormattedCreatedAt() ?></time>
+<section id="article-page">
 
-<button class="btn-save" data-article-id="<?= $article->getIdArticle() ?>">Enregistrer</button>
+    <div>
+        <h1><?= $article->getTitle() ?></h1>
+        <p> <?= $article->getSummary() ?></p>
+        <p><?= $article->getUserName() ?></p>
+        <time> <?= $article->getFormattedCreatedAt() ?></time>
+        <button id="save-btn"  data-article-id="<?= $_GET['id'] ?>">Enregistrer</button>
+    </div>
 
-<form action="<?= constructUrl('article', ['id' => $article->getIdArticle()]) ?>" method="POST">
-    <label for="nickname">Pseudo :</label>
-    <input type="text" name="nickname" id="nickname" value="<?php if (isset($nickname)) echo $nickname ?>">
+    <div>
+        <img id="img-article-page" src="<?=asset('images/' . $article->getImage())?>" alt="">
+        <p><?= $article->getContent() ?></p>
+    </div>
 
-    <label for="content">Commentaire :</label>
-    <textarea name="content" id="content" cols="30" rows="10"></textarea>
-    <button type="submit">Envoyer</button>
-</form>
+    <div>
+        <form action="<?= constructUrl('article', ['id' => $article->getIdArticle()]) ?>" method="POST">
+            <label for="nickname">Pseudo :</label>
+            <input type="text" name="nickname" id="nickname" value="<?php if (isset($nickname)) echo $nickname ?>">
 
-<h2>Commentaires :</h2>
+            <label for="content">Commentaire :</label>
+            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
 
-<?php foreach ($comments as $comment) : ?>
-    <h3><?= $comment->getNickname() ?></h3>
-    <time><?= $comment->getFormattedCreatedAt() ?></time>
-    <p><?= $comment->getContent() ?></p>
-<?php endforeach; ?>
+    <div>
+        h2>Commentaires :</h2>
+
+        <?php foreach ($comments as $comment) : ?>
+            <h3><?= $comment->getNickname() ?></h3>
+            <time><?= $comment->getFormattedCreatedAt() ?></time>
+            <p><?= $comment->getContent() ?></p>
+        <?php endforeach; ?>
+    </div>
+</section>
+
+<script src="<?= asset("js/article.js") ?>"></script>
