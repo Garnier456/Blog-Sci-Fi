@@ -1,14 +1,13 @@
-
 <section class="columns-container">
     <div class="wrapper">
         <div class="col-1">
             <div class="content-column">
                 <?php foreach ($articles as $article) : ?>
                     <article class="standard-article">
-                        <div class="img-article" style="background-image: url('<?=asset('images/' . $article->getImage())?>')">
+                        <div class="img-article" style="background-image: url('<?= asset('images/' . $article->getImage()) ?>')">
                             <div class="category-article">
                                 <div>
-                                    <img src=" <?=asset('images/' . $article->getCategoryIcon())?>" alt="">
+                                    <img src=" <?= asset('images/' . $article->getCategoryIcon()) ?>" alt="">
                                     <a><?= $article->getCategoryName() ?></a>
                                 </div>
                                 <time><?= $article->getFormattedCreatedAt(); ?></time>
@@ -30,12 +29,12 @@
 
         <div class="col-1">
             <div class="content-column">
-            <?php foreach ($articles as $article) : ?>
+                <?php foreach ($articles as $article) : ?>
                     <article class="standard-article">
-                        <div class="img-article" style="background-image: url('<?=asset('images/' . $article->getImage())?>')">
+                        <div class="img-article" style="background-image: url('<?= asset('images/' . $article->getImage()) ?>')">
                             <div class="category-article">
                                 <div>
-                                    <img src=" <?=asset('images/' . $article->getCategoryIcon())?>" alt="">
+                                    <img src=" <?= asset('images/' . $article->getCategoryIcon()) ?>" alt="">
                                     <a><?= $article->getCategoryName() ?></a>
                                 </div>
                                 <time><?= $article->getFormattedCreatedAt(); ?></time>
@@ -65,12 +64,20 @@
         </div>
 
         <div id="top-article-box">
-            <?php foreach ($topArticles as $topArticle) : ?>
-                <article>
-                    <div id="img-top" style="background-image: url('<?=asset('images/' . $topArticle->getImage())?>')">
-                    </div>
-                </article>
-            <?php endforeach; ?>
+            <h2>Top Articles</h2>
+            <div class="top-article-container">
+                <?php foreach ($topArticles as $topArticle) : ?>
+                    <article class="top-article">
+                        <div class="top-article-image" style="background-image: url('<?= asset('images/' . $topArticle->getImage()) ?>')">
+                        </div>
+                        <div class="top-article-details">
+                            <h3><?= $topArticle->getTitle(); ?></h3>
+                            <p><?= $topArticle->getSummary(); ?></p>
+                            <a href="<?= constructUrl('article', ['id' => $topArticle->getIdArticle()]); ?>">Lire la suite</a>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Model\UserModel;
+use App\Service\UserSession;
 
 class UserController {
 
@@ -64,6 +65,24 @@ class UserController {
         // Affichage du template
         $template = 'signup';
         include TEMPLATE_DIR .'/base.phtml';
+    }
+
+    public function showProfile()
+    {
+        // Vérifier si l'utilisateur est connecté
+        $userSession = new UserSession();
+        if (!$userSession->getUser()) {
+            // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+            header('Location: ' . constructUrl('login'));
+            exit;
+        }
+
+        // Récupérer les informations de l'utilisateur connecté
+        $user = $userSession->getUser();
+
+        // Afficher le template du profil avec les informations de l'utilisateur
+        $template = 'profile';
+        include TEMPLATE_DIR . '/base.phtml';
     }
 
     private function validateForm(

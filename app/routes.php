@@ -21,6 +21,11 @@ $routes = [
         'controller' => 'ArticleController',
         'method' => 'saveArticle'
     ],
+    'profile' => [
+        'path' => '/profile',
+        'controller' => 'UserController',
+        'method' => 'showProfile'
+    ],
     'signup' => [
         'path' => '/signup',
         'controller' => 'UserController',

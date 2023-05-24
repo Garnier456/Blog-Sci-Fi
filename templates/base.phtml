@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="<?= asset("css/base.css") ?>">
     <link rel="stylesheet" href="<?= asset("css/home.css") ?>">
     <link rel="stylesheet" href="<?= asset("css/article.css") ?>">
+    <link rel="stylesheet" href="<?= asset("css/login.css") ?>">
+    <link rel="stylesheet" href="<?= asset("css/signup.css") ?>">
     <script src="https://kit.fontawesome.com/76e1dcc4c0.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -18,31 +20,52 @@
         <h1>Mon super Blog</h1>
     </header>
 
-        <nav>
-            <div>
+    <nav>
+        <div>
+            <a href="<?= constructUrl('home'); ?>">Accueil</a>
             <a href="<?= constructUrl('category', ['id' => 1]); ?>">Film</a>
             <a href="<?= constructUrl('category', ['id' => 2]); ?>">Série</a>
             <a href="<?= constructUrl('category', ['id' => 3]); ?>">Livre</a>
             <a href="<?= constructUrl('category', ['id' => 4]); ?>">Comics</a>
             <a href="<?= constructUrl('category', ['id' => 5]); ?>">Jeux Vidéo</a>
-            </div>
-            <?php if ((new App\Service\UserSession())->getUser()):?>
-                <a href="<?=constructUrl('logout');?>">Déconnexion</a>
-            <?php else: ?>
-                <a href="<?=constructUrl('login');?>">Connexion</a>
-                <a href="<?=constructUrl('signup');?>">Créer un compte</a>
-            <?php endif; ?>
-        </nav>
+        </div>
+        <div class="account-links">
+    <?php if ((new App\Service\UserSession())->getUser()) : ?>
+        <?php if ((new App\Service\UserSession())->isUser()) : ?>
+            <a href="<?= constructUrl('profile'); ?>">Profil</a>
+        <?php elseif ((new App\Service\UserSession())->isAdmin()) : ?>
+            <a href="<?= constructUrl('admin_dashboard'); ?>">Administration</a>
+        <?php endif; ?>
+        <a href="<?= constructUrl('logout'); ?>">Déconnexion</a>
+    <?php else : ?>
+        <a href="<?= constructUrl('login'); ?>">Connexion</a>
+        <a href="<?= constructUrl('signup'); ?>">Créer un compte</a>
+    <?php endif; ?>
+</div>
+
+    </nav>
 
     <main>
-
-        <!-- Message flash -->
-        <?php if (isset($flashMessage) && $flashMessage): ?>
-            <p class="success"><?=$flashMessage;?></p>
-        <?php endif; ?>
-
         <!-- Contenu de la page -->
         <?php include TEMPLATE_DIR . '/' . $template . '.phtml'; ?>
     </main>
+
+
+    <footer>
+        <div class="social">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i><a>
+        </div>
+        <ul class="list">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">Company Name © 2018</p>
+    </footer>
 </body>
+
 </html>

@@ -29,6 +29,17 @@ class UserSession {
         return $_SESSION[self::SESSION_KEY] ?? null;
     }
 
+    public function isUser(): bool
+    {
+        // Si l'utilisateur n'est pas connecté
+        if (!isset($_SESSION[self::SESSION_KEY])) {
+            return false;
+        }
+
+        // Est-ce que le rôle de l'utilisateur connecté est le rôle "user" ?
+        return $_SESSION[self::SESSION_KEY]->getRole() === UserRole::USER;
+    }
+
     public function isAdmin(): bool
     {
         // Si l'utilisateur n'est pas connecté
