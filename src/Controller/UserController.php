@@ -19,6 +19,7 @@ class UserController {
     {
         $username = '';
         $email = '';
+        $successMessage = null;
 
         // Si le formulaire est soumis
         if (!empty($_POST)) {
@@ -52,7 +53,8 @@ class UserController {
                 $this->userModel->addUser($user);
 
                 // Ajout d'un message flash en session
-                $_SESSION['flash'] = 'Votre compte a été créé avec succès.';
+                $successMessage = 'Votre compte a été créé avec succès.';
+                $_SESSION['flash'] = $successMessage; 
 
                 // Redirection vers l'index.php mais sans les données du formulaire
                 // Design pattern : POST redirect GET (cf https://fr.wikipedia.org/wiki/Post-redirect-get)

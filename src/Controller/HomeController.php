@@ -15,7 +15,7 @@ class HomeController {
 
         // Messages flash
         if (array_key_exists('flash', $_SESSION) && $_SESSION['flash']) {
-            $flashMessage = $_SESSION['flash'];
+            $successMessage = $_SESSION['flash'];
             $_SESSION['flash'] = null;
         }
 

@@ -1,3 +1,9 @@
+<?php if (!empty($successMessage)) : ?>
+    <div>
+        <p class="success-message"><?= $successMessage ?></p>
+    </div>
+<?php endif; ?>
+
 <section class="columns-container">
     <div class="wrapper">
         <div class="col-1">
@@ -55,15 +61,15 @@
         </div>
     </div>
 
-    <div id="right-block">
-        <div id="quotes">
+    <div class="right-block">
+        <div class="quotes">
             <span>
                 <h2>Sci-Fact du Jour</h2>
             </span>
             <p></p>
         </div>
 
-        <div id="top-article-box">
+        <div class="top-article-box">
             <h2>Top Articles</h2>
             <div class="top-article-container">
                 <?php foreach ($topArticles as $topArticle) : ?>

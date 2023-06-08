@@ -36,9 +36,9 @@
 
     <?php foreach ($comments as $comment) : ?>
       <div class="comment">
-        <h3><?= $comment->getNickname() ?></h3>
-        <time><?= $comment->getFormattedCreatedAt() ?></time>
-        <p><?= $comment->getContent() ?></p>
+        <h3><?= htmlspecialchars($comment->getNickname()) ?></h3>
+        <time><?= htmlspecialchars($comment->getFormattedCreatedAt()) ?></time>
+        <p><?= htmlspecialchars($comment->getContent()) ?></p>
       </div>
     <?php endforeach; ?>
   </div>

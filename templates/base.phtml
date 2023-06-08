@@ -17,7 +17,7 @@
 
 <body>
     <header>
-        <h1>Mon super Blog</h1>
+         <h1>Galactic Chronicles</h1>
     </header>
 
     <nav>
@@ -29,20 +29,20 @@
             <a href="<?= constructUrl('category', ['id' => 4]); ?>">Comics</a>
             <a href="<?= constructUrl('category', ['id' => 5]); ?>">Jeux Vidéo</a>
         </div>
+        
         <div class="account-links">
-    <?php if ((new App\Service\UserSession())->getUser()) : ?>
-        <?php if ((new App\Service\UserSession())->isUser()) : ?>
-            <a href="<?= constructUrl('profile'); ?>">Profil</a>
-        <?php elseif ((new App\Service\UserSession())->isAdmin()) : ?>
-            <a href="<?= constructUrl('admin_dashboard'); ?>">Administration</a>
-        <?php endif; ?>
-        <a href="<?= constructUrl('logout'); ?>">Déconnexion</a>
-    <?php else : ?>
-        <a href="<?= constructUrl('login'); ?>">Connexion</a>
-        <a href="<?= constructUrl('signup'); ?>">Créer un compte</a>
-    <?php endif; ?>
-</div>
-
+            <?php if ((new App\Service\UserSession())->getUser()) : ?>
+                <?php if ((new App\Service\UserSession())->isUser()) : ?>
+                    <a href="<?= constructUrl('profile'); ?>">Profil</a>
+                <?php elseif ((new App\Service\UserSession())->isAdmin()) : ?>
+                    <a href="<?= constructUrl('admin_dashboard'); ?>">Administration</a>
+                <?php endif; ?>
+                <a href="<?= constructUrl('logout'); ?>">Déconnexion</a>
+            <?php else : ?>
+                <a href="<?= constructUrl('login'); ?>">Connexion</a>
+                <a href="<?= constructUrl('signup'); ?>">Créer un compte</a>
+            <?php endif; ?>
+        </div>
     </nav>
 
     <main>

@@ -42,7 +42,7 @@
   align-items: flex-end;
   background-size: cover;
   background-position: 50% 20%;
-  height: 150px;
+  height: 22vh;
   border-radius: 7px 7px 0 0;
   color: black;
 }
@@ -76,7 +76,7 @@
 
 .content-article h2 {
   color: #241c05;
-  font-size: 30px;
+  font-size: 1.6em;
 }
 
 .content-article p {
@@ -89,67 +89,68 @@
 }
 
 .content-article a::before {
-  font-family: "FontAwesome"; /* nom de la police d'icônes */
-  content: "\f061"; /* code unicode pour l'icône de la flèche vers la droite */
-  margin-right: 5px; /* espace entre l'icône et le texte */
+  font-family: "FontAwesome"; 
+  content: "\f061"; 
+  margin-right: 5px;
 }
+
 
 .content-article span {
   display: flex;
   justify-content: space-between;
 }
 
-#right-block {
+.right-block {
   display: flex;
   flex-direction: column;
   gap: 60px;
   align-items: center;
 }
 
-#right-block article {
+.right-block article {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 70px;
 }
 
-#quotes {
+.quotes {
   display: flex;
   flex-direction: column;
   border: 2px solid black;
   border-radius: 7px;
-  background-color: #e3ae3c;
+  background-color:white;
   color: white;
   width: 60%;
   height: fit-content;
   gap: 5px;
 }
 
-#quotes span {
+.quotes span {
   text-align: center;
   width: 100%;
-  background-color: #3a2c0f;
+  background-color: #4b2661;
 }
 
-#quotes p {
+.quotes p {
   padding: 10px;
 }
 
-#img-top {
+.top-article-image {
   background-size: cover;
   background-position: 50% 20%;
-  height: 150px;
+  height: 20vh;
   width: 100%;
   border-radius: 7px 7px 0 0;
   color: black;
 }
 
-#top-article-box {
+.top-article-box {
   width: 100%;
   padding: 20px;
 }
 
-#top-article-box h2 {
+.top-article-box h2 {
   font-size: 18px;
   margin-bottom: 10px;
 }
@@ -243,7 +244,7 @@
     font-size: 24px;
   }
 
-  #right-block {
+  .right-block {
     display: none;
   }
 }

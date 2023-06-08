@@ -1,5 +1,3 @@
-console.log('ok')
-
 $(document).ready(function() {
   $('#save-btn').click(function() {
     let articleId = $(this).data('article-id'); // Obtenez l'identifiant de l'article à partir de votre page

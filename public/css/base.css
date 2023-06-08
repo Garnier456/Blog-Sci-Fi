@@ -18,13 +18,29 @@ main {
 header {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   height: 200px;
   background-image: url(../images/background-header.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 40%;
   color: white;
+}
+
+header h1 {
+  font-family: "Orbitron";
+  letter-spacing: 3px;
+  font-size:3em;
+  margin-bottom: 100px;
+  background-color:#344c65a2;
+  box-shadow: 5px 5px#292929;
+  border-left: 2px solid rgba(0, 0, 0, 0.74);
+  border-right: 2px solid rgba(0, 0, 0, 0.5);
+  border-top: 2px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.781);
+  padding: 5px;
+  border-radius: 10px;
+  text-shadow: 5px 5px rgb(0, 0, 0);
 }
 
 nav {
@@ -62,7 +78,7 @@ nav a {
 }
 
 .account-links a {
-  margin-right: 10px;
+  margin-right: 40px;
 }
 
 footer {
@@ -99,6 +115,14 @@ footer {
 .social i {
   color: #d1d0d0;
   font-size: 40px;
+}
+
+.error {
+  color: red;
+}
+
+.success-message {
+  color: green;
 }
 
 /* Styles pour les écrans de taille inférieure ou égale à 768px */
